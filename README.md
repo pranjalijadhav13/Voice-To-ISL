@@ -1,4 +1,4 @@
-# Voice-To-ISL
+# Voice to Indian Sign Language Translator
 There is a common perception that even though deaf people use sign language as their main language, they can read texts fluently in their countries' oral language because their vision isn't hindered. Such perception does not correspond to reality. A sign language is a language on its own; people use different sign languages in different parts of the world. India has its sign language by the name Indian Sign Language (ISL). As a language on its own, it has a set of grammar rules and specific sentence structure. These differences and the fact that signers learn their countries' written language as a second language are the main reason why deaf people can't fluently read written texts. Eg:- the sentence "I'm going home" in English can be "Home go" in sign language; for a person whose main language signs, all other words in the
 sentence are seen as noise that makes comprehension harder. To overcome this, we need a system for converting speech to sign language.
 
@@ -7,7 +7,6 @@ Sign language is a natural way of communication for challenged people with speak
 The proposed speech to Indian Sign language translation system consists of two parts:
 
     1. English speech to text translation
-    
     2. Text to ISL translation
     
 The second part consists of a parsing module that parses the input English sentence to phrase structure grammar representation on which Indian sign language grammar rules are applied to reorder the words of the English sentence (as the grammar of English language and Indian sign language is different). The elimination module eliminates unwanted words from the reordered sentence. Lemmatization is applied to
