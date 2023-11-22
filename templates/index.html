@@ -1,0 +1,147 @@
+<html>
+	<head>
+		<title>Speech-To-ISL-Converter</title>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
+		<style type="text/css">
+			h1{
+				margin-top: 0px;
+			}
+			body{
+				background-color: #ffff80;
+				font-family: cursive;
+				width: 100%;
+  				background-repeat: no-repeat;
+  				background-size: cover;
+    			overflow-x: hidden;
+			}
+			.spinner{
+			    width: 80px;
+			    height: 80px;
+			    background-color: #ffff80;
+			    border: 2px solid #f3f3f3;
+			    border-top:3px solid #f25a41;
+			    border-radius: 100%;
+			    
+			    position: absolute;
+			    top:0;
+			    bottom:0;
+			    left:0;
+			    right: 0;
+			    margin: auto;
+			    
+			    animation: spin 1s infinite linear;
+			}
+			#result{
+				height: 180px;
+				border-radius: 10px;
+				margin-bottom: 30px;
+				font-size: 14px;
+				line-height: 25px;
+			}
+			#result1{
+				height: 50px;
+				border-radius: 10px;
+				margin-bottom: 30px;
+				font-size: 14px;
+				line-height: 25px;
+			}
+			button-con {
+				position: relative;
+				border: 1px solid currentColor;
+				border-radius: 10px;
+				font-size: 1.1rem;
+				color: #4f93ce;
+				margin: 50rem 0;
+				padding: 0.75rem 3rem;
+				cursor: pointer;
+				-webkit-transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+				transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+				overflow: hidden;
+				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+			}
+		</style>
+	</head>
+   	<body>
+   		<center><img src="static/image.png" width="80" height="80">
+  		<h1 align="center"><span style="color: #ff7e00; font-size: 45px;">Voice to Indian Sign Language Convertor</span><br></h1>
+  		<span style="color: black; font-size: 25px; font-weight: bold">Converting Speech Input To Text</span></br>
+  		<div> </div>
+  		<br></br>
+		<div id="result" align="center">
+			<br>
+		 	<label style="font-size: 25px; color: black">Speech Input:</label><br></br>
+      		<form action = "result" method = "POST">
+        		<input type="text" id="result1" size="35" maxlength=100 name = "Name" style="font-family:Courier; font-size: 18px; font-weight: 600" required />
+	        	</br>
+				<br>
+	        	<button type = "button" style="position:absolute; left:47%; font-size:27px; display: inline-block; border-radius: 10px; border: 1.5px solid black; cursor: pointer;" onclick="startConverting();"><i class="fa fa-microphone"></i></button>
+			<!-- click this button to stop converting-->
+				<button type = "button" style="position:absolute; left:51.5%; font-size:27px; display: inline-block; border-radius: 10px; border: 1.5px solid black; cursor: pointer;" onclick="stopConverting();"><i class="fa fa-remove"></i></button>
+				</br>
+	        	<p><input type = "submit" value = "Submit" style=" background-color: #ff7e00;font-size:23px; padding: 10px 25px; text-align: center; display: inline-block; border-radius: 10px; border: 2px solid black; font-family: cursive; margin-top: 10px; cursor: pointer;"/></p>
+
+	        	<p><input type = "button" value = "Clear" onClick = "clearText()" style=" background-color: #ff7e00;font-size:23px; padding: 10px 25px; text-align: center; display: inline-block; border-radius: 10px; border: 2px solid black; font-family: cursive; margin-top: 10px; cursor: pointer;"/></p>
+      		</form>
+      	</div>
+      </center>
+		<script type="text/javascript">
+		
+			var overlay = document.getElementById("overlay");
+			var r = document.getElementById('result1');
+			var speechRecognizer = new webkitSpeechRecognition();// a new speech recognition object
+			
+			//function to start listening to voice and then convert it to text
+			function startConverting () {
+				if('webkitSpeechRecognition' in window){
+					
+					speechRecognizer.continuous = true;
+					speechRecognizer.interimResults = true;
+					//speechRecognizer.lang = 'en-IN';
+					speechRecognizer.start();
+					var finalTranscripts = '';
+					speechRecognizer.onresult = function(event){
+						var interimTranscripts = '';
+						var transcript = '';
+						for(var i = event.resultIndex; i < event.results.length; i++){
+							transcript = event.results[i][0].transcript;
+							transcript.replace("\n", "<br>");
+							if(event.results[i].isFinal){
+								finalTranscripts += transcript;
+							}else{
+								interimTranscripts += transcript;
+							}
+							console.log("transcript: " + transcript);
+							console.log("interimTranscripts: " + interimTranscripts);
+							console.log("finalTranscripts: " + finalTranscripts);
+						}
+						var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+						console.log(isMobile);
+						if (isMobile) {
+							r.value = transcript;
+						} else {
+							r.value = finalTranscripts + interimTranscripts ;
+						}
+						
+					};
+					speechRecognizer.onerror = function (event) {
+					};
+				}else{
+					r.innerHTML = 'No browser support. Please upgrade your browser';
+				}
+			}
+			//function to stop listening
+			function stopConverting()
+			{
+				speechRecognizer.stop();
+			}
+			
+			function clearText(){
+				r.value = "";
+				stopConverting();
+			}
+		</script>
+		<br>
+    	</br>
+    	 
+   	</body>
+</html>
