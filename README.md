@@ -5,7 +5,9 @@ sentence are seen as noise that makes comprehension harder. To overcome this, we
 Sign language is a natural way of communication for challenged people with speaking and hearing disabilities. There have been various mediums available to translate or to recognize sign language and convert them to voice, but speech to sign language conversion systems have been rarely developed, this is due to the scarcity of any sign language corpus. Our project aims at creating ana English speech to Indian sign language translation system using NLP. Natural Language Processing, is broadly defined as the automatic manipulation of natural language, like speech and text, by software.
 
 The proposed speech to Indian Sign language translation system consists of two parts:
+
     1. English speech to text translation
+    
     2. Text to ISL translation
     
 The second part consists of a parsing module that parses the input English sentence to phrase structure grammar representation on which Indian sign language grammar rules are applied to reorder the words of the English sentence (as the grammar of English language and Indian sign language is different). The elimination module eliminates unwanted words from the reordered sentence. Lemmatization is applied to
