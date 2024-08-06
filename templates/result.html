@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Speech-To-Text-Converter</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
+        <style type="text/css">
+            h1{
+                margin-top: 0px;
+            }
+            body{
+                font-family: cursive;
+                width: 100%;
+                background-color: #ffff80;
+                background-repeat: no-repeat;
+                background-size: cover;
+                overflow-x: hidden;
+            }
+            .spinner{
+                width: 80px;
+                height: 80px;
+                background-color: #ffff80;
+                border: 2px solid #f3f3f3;
+                border-top:3px solid #f25a41;
+                border-radius: 100%;
+                
+                position: absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                right: 0;
+                margin: auto;
+                
+                animation: spin 1s infinite linear;
+            }
+            #result{
+                height: 180px;
+                background-color: white;
+                box-shadow: 0 0 10px 0 #bbb;
+                margin-bottom: 30px;
+                font-size: 14px;
+                line-height: 25px;
+             }
+             button-con {
+                position: relative;
+                border: 1px solid currentColor;
+                font-size: 1.1rem;
+                color: #4f93ce;
+                margin: 3rem 0;
+                padding: 0.75rem 3rem;
+                cursor: pointer;
+                -webkit-transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+                transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+                overflow: hidden;
+                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+            }
+        </style>
+    </head>
+    <body>
+        <center><img src="static/image.png" width="80" height="80">
+        <h1 align="center"><span style="color: #ff7e00; font-size: 45px;">Voice to Indian Sign Language Convertor</span></h1>
+        {% for value in result.items() %}
+        <h3><span style="color: black; font-size: 20px; font-family: cursive;">
+        {{ value[0] }} : {{ value[1] }} </h3>
+        {% endfor %}
+        <h3> <span style="color: #ff7e00; font-size: 35px; font-family: cursive;">
+        Text to Video Conversion </h3>
+        <video width="500" height="380" controls>
+            <source type = "video/mp4" src = "{{url_for('static', filename = result1)}}" >
+                Your browser does not support the video tag.
+        </video>
+    
+        <p><input type = "submit" value = "Back" style=" background-color: #ff7e00;font-size:23px; padding: 10px 25px; text-align: center; display: inline-block; border-radius: 10px; border: 2px solid black; font-family: cursive; margin-top: 10px; cursor: pointer;" onClick="location.href='/'" /></p>
+
+      </center>
+   </body>
+</html>
